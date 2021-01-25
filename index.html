@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  #cvs{
+    border:1px solid black;
+    width:765px;
+    height:500px;
+  }
+  </style>
+</head>
+<body>
+<!-- 
+<canvas id=cvs>
+  
+</canvas> -->
+
+
+  <script src="https://threejs.org/build/three.js"></script>
+  <script>
+  var c = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  
+   var renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+  
+  document.addEventListener('resize', function(){
+  var renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+  })
+
+// create a shape
+var geometry = new THREE.BoxGeometry(1,1,1);
+var mat1 = new THREE.MeshBasicMaterial({color: 0x87CEEB, wireframe: true })
+var  cube = new THREE.Mesh(geometry, mat1);
+c.add(cube);
+camera.position.z = 3
+
+// game logic
+var update = function(){
+cube.rotation.x += 0.01;
+cube.rotation.y += 0.01;
+}
+
+// draw Scene
+var render = function(){
+renderer.render(c, camera)
+}
+// game loop
+function loop(){
+requestAnimationFrame(loop);
+update();
+render();
+}
+
+loop();
+  </script>
+</body>
+</html>
